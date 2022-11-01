@@ -5,10 +5,10 @@
 #include <stdio.h>
 int power(int n,int k)
 {
-	if (k != 0)
+	if (k != 0) //递归限制条件
 	{
-		k--;
-		return n * power(n, k);
+		k--; //递归条件变化
+		return n * power(n, k); 
 	}
 	else
 		return 1;		
