@@ -54,7 +54,7 @@ void PrintfBoard(char board[ROW][COL], int row, int col)
 }
 
 //玩家下棋
-void Player(char board[ROW][COL], int row, int col)
+char Player(char board[ROW][COL], int row, int col)
 {
 	//第一步，提示下棋
 	int x = 0;
@@ -68,7 +68,7 @@ void Player(char board[ROW][COL], int row, int col)
 		if (x <= row && y <= col && x > 0 && y > 0 && (board[x - 1][y - 1] == ' '))
 		{
 			board[x - 1][y - 1] = Pc;
-			break;
+			return isWin(board, row, col, x-1, y-1);
 		}
 		else
 			printf("输入坐标非法,请重新输入\n");
@@ -76,7 +76,7 @@ void Player(char board[ROW][COL], int row, int col)
 }
 
 //电脑下棋
-void Computer(char board[ROW][COL], int row, int col)
+char Computer(char board[ROW][COL], int row, int col)
 {
 	while (1)
 	{
@@ -85,8 +85,8 @@ void Computer(char board[ROW][COL], int row, int col)
 		int y = rand() % col; //随机生成纵坐标
 		if ((board[x][y] == ' '))
 		{
-			board[x][y] = Cc;
-			break;
+			board[x][y] = Cc;	
+			return isWin(board, row, col, x, y);
 		}
 	}
 }
@@ -108,32 +108,124 @@ void Computer(char board[ROW][COL], int row, int col)
 }
 
 //判断输赢
-char isWin(char board[ROW][COL], int row, int col)
-{
-	 //判断三行，三列
-	int i = 0;
-	//判断行
-	for (i = 0; i < row; i++)
-	{
-		if ((board[0][i] == board[1][i]) && (board[1][i] == board[2][i]) && (board[1][i] != ' '))
-			return board[1][i];
-	}
-	//判断列
-	for (i = 0; i < col; i++)
-	{
-		if ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) && (board[i][1] != ' '))
-			return board[i][0];
-	}
-	//判断斜对角
-	if ((board[0][0] == board[1][1]) && (board[1][1] == board[3][3]) && (board[1][1] != ' '))
-		return board[i][0];
+//char isWin(char board[ROW][COL], int row, int col)
+//{
+//	 //判断三行，三列
+//	int i = 0;
+//	//判断行
+//	for (i = 0; i < row; i++)
+//	{
+//		if ((board[0][i] == board[1][i]) && (board[1][i] == board[2][i]) && (board[1][i] != ' '))
+//			return board[1][i];
+//	}
+//	//判断列
+//	for (i = 0; i < col; i++)
+//	{
+//		if ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2]) && (board[i][1] != ' '))
+//			return board[i][0];
+//	}
+//	//判断斜对角
+//	if ((board[0][0] == board[1][1]) && (board[1][1] == board[3][3]) && (board[1][1] != ' '))
+//		return board[i][0];
+//
+//	if ((board[2][0] == board[1][1]) && (board[1][1] == board[0][2]) && (board[1][1] != ' '))
+//		return board[i][0];
+//
+//	//判断棋盘是否满了
+//	if(is_full_board(board,ROW,COL))
+//		return 'Q';
+//	return 'C';
+//}
 
-	if ((board[2][0] == board[1][1]) && (board[1][1] == board[0][2]) && (board[1][1] != ' '))
-		return board[i][0];
+ //判断输赢，优化了一下
+  int isWin(char board[ROW][COL], int row, int col,int x , int y)
+ {
+	 int count = 1;
+	 int i = 0;
+	 //判断列
+	 //下列
+	 for (i = 1; i < WIN; i++)
+		 if (board[x][y] == board[x][y + i] && ((y+i) < col) )
+			 count++;
+		 else 
+			 break;
 
-	//判断棋盘是否满了
-	if(is_full_board(board,ROW,COL))
-		return 'Q';
-	return 'C';
-}
+	 
+	 //上列
+	 for (i = 1; i < WIN; i++)
+		 if (board[x][y] == board[x][y - i] && ((y - i) >= 0))
+			 count++;
+		 else 
+			 break;
+		
 
+	 //判断列是否胜利
+	 if (count >= WIN)
+		 return board[x][y];
+	 else //列没有对应的，count初始化0
+		 count = 1;
+
+	 //判断行
+	 //右行
+	 for (i = 1; i < WIN; i++)
+		 if (board[x][y] == board[x-i][y] && ((x - i) >= 0))
+			 count++;
+		 else 
+			 break;
+		 
+	 //左行
+	 for (i = 1; i < WIN; i++)
+		 if (board[x][y] == board[x + i][y] && ((x + i) < row))
+			 count++;
+		 else 
+			 break;
+
+
+	 if (count >= WIN)
+		 return board[x][y];
+	 else
+		 count = 1;
+
+	 //判断右上
+	 for (i = 1; i < WIN; i++)
+		 if (board[x][y] == board[x + i][y-i] && (((y - i) >= 0) && ((x+i) < row )))
+			 count++;
+		 else 
+			 break;
+		 
+
+	 //判断左下
+	 for (i = 1; i < WIN; i++)
+		 if (board[x][y] == board[x - i][y + i] &&( ((y + i) < col) && ((x-i) >=0 )))
+			 count++;
+		 else 
+			 break;
+		 
+
+	 if (count >= WIN)
+		 return board[x][y];
+	 else
+		 count = 1;
+
+	 //判断左上
+	 for (i = 1; i < WIN; i++)
+		 if (board[x][y] == board[x - i][y - i] &&(( (x - i) >= 0) && ((y - i) >= 0)))
+			 count++;
+		 else
+			 break;
+
+	 //判断右下
+	 for (i = 1; i < WIN; i++)
+		 if (board[x][y] == board[x+ i][y + i] && (((x + i) < row) &&( (y - i) < col )))
+			 count++;
+		 else
+			 break;
+
+	 if (count >= WIN)
+		 return board[x][y];
+
+	 if (is_full_board(board, row, col))
+		 return 'Q';
+
+		 return 'C';
+ }

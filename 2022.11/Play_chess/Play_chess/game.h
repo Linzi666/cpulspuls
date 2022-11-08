@@ -6,10 +6,13 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-#define ROW 3 // 行
-#define COL 3 // 列
+
+#define ROW 15 // 行
+#define COL 15 // 列
 #define Pc '*'
 #define Cc '#'
+#define WIN 7 //胜利条件，5个就是5个连在一起胜利
+
 
 
 //初始化棋盘
@@ -19,10 +22,10 @@ void intoboard(char board[ROW][COL], int, int);
 void PrintfBoard(char board[ROW][COL], int, int);
 
 //玩家下棋
-void Player(char board[ROW][COL], int, int);
+char Player(char board[ROW][COL], int, int);
 
 //电脑下棋
-void Computer(char board[ROW][COL], int, int);
+char Computer(char board[ROW][COL], int, int);
 
 //判断输赢，返回一个字符值
-char isWin(char board[ROW][COL], int, int);
+//char isWin(char board[ROW][COL], int, int);

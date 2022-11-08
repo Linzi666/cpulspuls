@@ -31,25 +31,26 @@ void game()
 	char win = 0;
 	while (1)
 	{
-			Player(board,ROW,COL);
+			win = Player(board, ROW, COL);
 			PrintfBoard(board, ROW, COL); //¥Ú”°∆Â≈Ã
-			win = isWin(board, ROW, COL);
 			if(win != 'C')//≈–∂œ ‰”Æ
 			break;
 
 			printf("---------µÁƒ‘œ¬∆Â----------\n");
-			Computer(board, ROW, COL);
-			PrintfBoard(board, ROW, COL); // ¥Ú”°∆Â≈Ã
 
-			win = isWin(board, ROW, COL);
+			win = Computer(board, ROW, COL);
+			PrintfBoard(board, ROW, COL); // ¥Ú”°∆Â≈Ã
 			if (win != 'C')//≈–∂œ ‰”Æ
-			break;	
+				break;
+
+
+
 	}
 	if (win == '*')
 		printf("ƒ„”Æ¡À\n");
 	else if (win == '#')
 		printf("µÁƒ‘”Æ¡À\n");
-	else
+	else if(win == 'Q')
 		printf("∆Ωæ÷\n");
 
 }
