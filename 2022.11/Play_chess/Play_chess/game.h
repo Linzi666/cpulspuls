@@ -7,11 +7,11 @@
 #include <math.h>
 #include <time.h>
 
-#define ROW 15 // 行
-#define COL 15 // 列
+#define ROW 3 // 行
+#define COL 3 // 列
 #define Pc '*'
 #define Cc '#'
-#define WIN 5 //胜利条件，5个就是5个连在一起胜利
+#define WIN 3 //胜利条件，5个就是5个连在一起胜利
 
 
 
