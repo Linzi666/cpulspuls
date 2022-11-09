@@ -162,7 +162,7 @@ char Computer(char board[ROW][COL], int row, int col)
 	 //判断列是否胜利
 	 if (count >= WIN)
 		 return board[x][y];
-	 else //列没有对应的，count初始化0
+	 else //列没有对应的，count初始化1
 		 count = 1;
 
 	 //判断行

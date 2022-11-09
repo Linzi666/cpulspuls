@@ -11,7 +11,7 @@
 #define COL 15 // 列
 #define Pc '*'
 #define Cc '#'
-#define WIN 7 //胜利条件，5个就是5个连在一起胜利
+#define WIN 5 //胜利条件，5个就是5个连在一起胜利
 
 
 
