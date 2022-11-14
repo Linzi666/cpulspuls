@@ -17,6 +17,7 @@ int my_strlen(const char* str)
 
 }
 
+//方法 1
 char* str_move(char* str, int k)
 {
 
@@ -45,13 +46,64 @@ char* str_move(char* str, int k)
 	return pstr;
 }
 
+//方法2
+
+char* str_move2(char* str, int k)
+{
+	int len = my_strlen(str);
+	char* p = str;
+	k %= len;
+	while (k--)
+	{
+		char tmp = *str; //存储第一个字符
+		int j = 0;
+		for (j = 1; j < len; j++)  //把后面的往前移
+			*(str + j - 1) = *(str + j);
+		///最后一个位置 把tmp补上
+		*(str + len - 1) = tmp;
+
+	}
+	return p;
+}
+
+//字符串翻转
+void A(char* str, int right)
+{
+	
+	int left = 0;
+
+	while (left < right)
+	{
+		char tmp = *(str + left);
+		*(str + left) = *(str + right);
+		*(str + right) = tmp;
+		left++;
+		right--;
+	}
+}
+
+//方法三，逆转
+char* str_move3(char* str, int k)
+{
+	//把 0 - k 个字符翻转 ，k - len个字符翻转
+	int len = my_strlen(str);
+	k %= len;
+	A(str,k);
+	A(str + k, len - k);
+	A(str, len-1);
+}
+
 
 int main()
 {
 	char str[] = "ABCDEFG";
 	int k = 100;
 	str_move(str,k);
-	printf("%s",str);
+	printf("方法一:%s\n",str);
+	str_move2(str, 5);
+	printf("方法二:%s\n", str);
+	str_move2(str, 7);
+	printf("方法三:%s\n", str);
 
 	return 0;
 }
