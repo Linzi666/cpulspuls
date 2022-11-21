@@ -4,6 +4,7 @@
 #include<string.h>
 #include<assert.h>
 #include<stdlib.h>
+#include<stdlib.h>
 
 
 //类型声明
@@ -13,6 +14,7 @@
 #define SEX_MAX 5 //性别长度
 #define TELE_MAX 12 //电话号码长度 
 #define ADDRS_MAX 30 //地址长度 
+#define INTO_MAX 1 //通讯录的初始大小
 
 
 //定义枚举，菜单选项
@@ -43,8 +45,11 @@ typedef struct PeoInfo
 //通讯录结构体，含 1000个人的信息
 typedef struct Contact
 {
-	PeoInfo data[CONTACT_MAX];//能存放的 信息数量
+	//PeoInfo data[CONTACT_MAX];//能存放的 信息数量
+	//动态内存版本
+	PeoInfo* data;
 	int sz;  // 当前存放的人数
+	int capacity; //当前的存储容量
 }Contact;
 
 
@@ -69,3 +74,6 @@ void ModifyContact(Contact* con);
 
 //排序
 void SortContact(Contact* con);
+
+//释放通讯录
+void ReleaseContact(Contact* con);

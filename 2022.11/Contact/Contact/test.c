@@ -59,6 +59,9 @@ void ContactTest()
 			system("cls"); //清屏
 			break;
 		case EXIT:
+			printf("通讯录退出成功\n");
+			//释放通讯录申请的动态内存
+			ReleaseContact(&con);
 			break;
 		default:
 			printf("输入错误，请重新输入\n");

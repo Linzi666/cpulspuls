@@ -8,18 +8,61 @@ void InitContact(Contact* con)
 	assert(con);
 	con->sz = 0; //初始长度为0
 	//从data数组开始，每个字节设置为0，长度为整个数组大小
-	memset(con->data, 0, sizeof(con->data));	
+	//memset(con->data, 0, sizeof(con->data));	
+	//动态内存管理版本
+	//开辟初始的容量
+	con->capacity = INTO_MAX;
+	PeoInfo* ps = (PeoInfo*)malloc(con->capacity  * sizeof(PeoInfo));
+	//如果开辟失败
+	if (NULL == ps)
+	{
+		perror("InitContact::malloc");
+		return;
+	}
+	//空间开辟成功
+	con->data = ps;
+	memset(con->data , 0 , con->capacity * sizeof(PeoInfo));
+}
+
+
+//释放通讯录内存
+void ReleaseContact(Contact* con)
+{
+	free(con->data);
+	con->data = NULL;
+}
+
+
+
+//增容函数
+void AddCapacity(Contact* con)
+{
+	//增容
+		//容积 +2 
+	con->capacity += 2;
+	PeoInfo* ps = (PeoInfo*)realloc(con->data, sizeof(PeoInfo) * con->capacity);
+
+	//如果增容失败 
+	if (ps == NULL)
+	{
+		perror("AddCaoacity::realloc");
+		return;
+	}
+	//增容成功
+	con->data = ps;
+	
 }
 
 //添加联系人
 void AddContact(Contact* con)
 {
 	assert(con);
-	if (con->sz == 1000)
+	//如果容量不够
+	if (con->sz == con->capacity)
 	{
-		printf("通讯录已满，无法添加\n");
-		return;
+		AddCapacity(con);
 	}
+
 
 	//信息录入
 	printf("请输入姓名->");
