@@ -52,16 +52,18 @@ void ContactTest()
 			break;
 		case DELALL:
 			//删除所有联系人
-			InitContact(&con);
+			DelAll(&con);
 			printf("通讯录已全部清空\n");
 			break;
 		case CLEAR:
 			system("cls"); //清屏
 			break;
 		case EXIT:
-			printf("通讯录退出成功\n");
+			//保存通讯录
+			SaveContact(&con);
 			//释放通讯录申请的动态内存
 			ReleaseContact(&con);
+			printf("通讯录退出成功\n");
 			break;
 		default:
 			printf("输入错误，请重新输入\n");

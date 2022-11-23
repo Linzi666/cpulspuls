@@ -75,5 +75,11 @@ void ModifyContact(Contact* con);
 //排序
 void SortContact(Contact* con);
 
+//DelAll  删除所有联系人
+void DelAll(Contact* con);
+
 //释放通讯录
 void ReleaseContact(Contact* con);
+
+//保存通讯录
+void SaveContact(Contact* con);

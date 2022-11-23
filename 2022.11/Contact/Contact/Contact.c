@@ -2,6 +2,35 @@
 #include "Contact.h"
 #include "BubbleSort.h"
 
+//加载通讯录
+void LoadContact(Contact* con)
+{
+
+	//读通讯录
+	FILE* pf = fopen("contact.dat", "rb");
+	if (pf == NULL)
+	{
+		perror("InitContact::fopen");
+		return;
+	}
+
+	//存放读取到的数据
+	PeoInfo tmp = { 0 };
+	//如果 fread 会返回读到的数据个数，如果为0，就说明读完了
+	while (fread(&tmp, sizeof(PeoInfo), 1, pf))
+	{
+		//通讯录增容
+		void AddCapacity(Contact * con);
+		*(con->data + con->sz) = tmp;
+		con->sz++;
+	}
+	//关闭流
+	fclose(pf);
+	pf = NULL;
+
+}
+
+
 //初始化通讯录
 void InitContact(Contact* con)
 {
@@ -22,6 +51,7 @@ void InitContact(Contact* con)
 	//空间开辟成功
 	con->data = ps;
 	memset(con->data , 0 , con->capacity * sizeof(PeoInfo));
+    LoadContact(con);
 }
 
 
@@ -234,5 +264,34 @@ void SortContact(Contact* con)
 	}
 	if (falg)
 		printf("排序成功\n");
+}
+
+
+//保存通讯录
+void SaveContact(Contact* con)
+{
+	//打开文件
+	FILE* fp = fopen("contact.dat","wb");
+	if (fp == NULL)
+	{
+		perror("SaveContact::fopen");
+		return;
+	}
+	//写数据
+	int i = 0;
+	for(i = 0 ; i < con->sz ; i++)
+	fwrite(con->data+i,sizeof(PeoInfo),1,fp);
+
+	//关闭文件
+	fclose(fp);
+	fp = NULL;
+}
+
+
+void DelAll(Contact* con)
+{
+	memset(con->data, 0, con->capacity * sizeof(PeoInfo));
+	con->sz = 0;
+	con->capacity = INTO_MAX;
 }
 
