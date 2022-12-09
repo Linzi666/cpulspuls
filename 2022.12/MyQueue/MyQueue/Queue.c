@@ -105,15 +105,13 @@ size_t QueueGetSize(Queue* q)
 //销毁
 void QueueDestroy(Queue* q)
 {
-	QueueNode* next = q->head;
-	while (q->head != q->tail)
+	QueueNode* cru = q->head;
+	while (cru != NULL)
 	{
-		next = q->head -> next;
-		free(q->head);
-		q->head = next;
+		//存储下一个位置地址
+		QueueNode* next = cru->next;
+		free(cru);
+		cru = next;
 	}
-	//释放队尾
-	free(q->tail);
-	q->head = NULL;
-	q->tail = NULL;
+	
 }
