@@ -12,6 +12,11 @@ void test1()
 		HeapPush(&hp,arr[i]);
 
 	HeapPrint(&hp);
+	HeapPop(&hp);
+	HeapPrint(&hp);
+	HeapPop(&hp);
+	HeapPrint(&hp);
+
 }
 
 int main()
