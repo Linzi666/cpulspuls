@@ -116,7 +116,7 @@ void HeapPop(HP* hp)
 	//然后移除堆底元素
 	hp->sz--;
 	//然后向下调整
-	AdjustDown(hp->data,hp->sz-1,0);
+	AdjustDown(hp->data,hp->sz,0);
 
 }
 
