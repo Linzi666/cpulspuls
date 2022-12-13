@@ -90,17 +90,17 @@ void AdjustDown(HeapDataType* data, int n , int parent)
 	while (child < n)
 	{
 		//大堆
-		if (child+1 < n && data[child + 1] > data[child])
+		//if (child+1 < n && data[child + 1] > data[child])
 		//小堆
-		//if (child + 1 < n && data[child + 1] < data[child])
+		if (child + 1 < n && data[child + 1] < data[child])
 		{
 			child++;
 		}
 		//然后和父亲元比较
 		//大堆
-		if (data[child] > data[parent])
+		//if (data[child] > data[parent])
 		//小堆
-		//if ( data[child] < data[parent] )
+		if ( data[child] < data[parent] )
 		{
 			//位置交换
 			Swap(&data[parent], &data[child]);
