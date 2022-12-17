@@ -4,6 +4,7 @@
 #include "Heap.h"
 
 
+
 void HeapInit(HP* hp)
 {
 	hp->data = NULL;
@@ -37,12 +38,12 @@ void CheckCacpcity(HP* hp)
 	}
 }
 
-void Swap(int* x,int* y)
-{
-	int tmp = *x;
-	*x = *y;
-	*y = tmp;
-}
+//void Swap(int* x,int* y)
+//{
+//	int tmp = *x;
+//	*x = *y;
+//	*y = tmp;
+//}
 
 
 //向上调整建小堆

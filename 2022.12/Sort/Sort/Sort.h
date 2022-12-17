@@ -20,11 +20,21 @@ void SelectSort(int* data, int n);
 //∂—≈≈–Ú
 void HeapSort(int* data, int n);
 
+//√∞≈›≈≈–Ú
+void BubbleSort(int* data, int n);
+
 //øÏ≈≈
 void QuickSort(int* data, int n);
 
 //∑«µ›πÈøÏ≈≈
 void QuickSortNonR(int* data, int left, int right);
+
+//πÈ≤¢
+void MergeSort(int*data,int n);
+
+//∑«µ›πÈπÈ≤¢
+void MergeSortNonR(int* data, int n);
+
 
 
 

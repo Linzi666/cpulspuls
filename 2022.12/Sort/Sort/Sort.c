@@ -3,12 +3,12 @@
 #include "Sort.h"
 #include "MyStack.h"
 
-//void Swap(int* a, int* b)
-//{
-//	int temp = *a;
-//	*a = *b;
-//	*b = temp;
-//}
+void Swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
 
 //打印
 void PrintSort(int* data, int n)
@@ -140,6 +140,26 @@ void HeapSort(int* data, int n)
 	}
 }
 
+//冒泡排序
+void BubbleSort(int* data, int n)
+{
+	int end = n - 1;
+	while (end--)
+	{
+		int falg = 1;
+		for (int i = 0; i <= end; i++)
+		{
+			if (data[i] > data[i+1])
+			{
+				Swap(&data[i], &data[i+1]);
+				falg = 0;
+			}
+		}
+		if (falg)
+			break;
+	}
+}
+
 
 //三数取中
 
@@ -217,10 +237,12 @@ int Partition2(int* data, int left, int right)
 int Partition3(int* data, int left, int right)
 {
 	assert(data);
+	int key = GetMid(data, left, right);
+	Swap(&data[key], &data[left]);
 
 	int prve = left;
 	int cru = prve + 1;
-	int key = left;
+	 key = left;
 	
 	while (cru <= right)
 	{
@@ -234,7 +256,7 @@ int Partition3(int* data, int left, int right)
 	return prve;
 }
 
-//快速排序
+//快排
 void QuickSort(int* data, int left,int right)
 {
 	assert(data);
@@ -285,4 +307,150 @@ void QuickSortNonR(int* data, int left, int right)
 			StackPush(&st, keyi - 1);
 		}
 	}
+}
+
+//归并
+void _MergeSort(int* data, int left, int right, int* tmp)
+{
+	if (left >= right)
+		return;
+
+	//找中间点一刀切
+	int mid = (left + right) / 2;
+	
+	//左区间递归归并
+	_MergeSort(data, left, mid, tmp);
+
+	//右区间递归归并
+	_MergeSort(data, mid+1, right, tmp);
+
+	//归并操作 
+	//左区间 left,mid ， 右区间 mid+1,right
+	int begin1 = left; 
+	int end1 = mid;
+	//右区间
+	int begin2 = mid + 1;
+	int end2 = right;
+	int i = left;
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		//归并
+		if (data[begin1] < data[begin2])
+		{
+			tmp[i++] = data[begin1++];
+		}
+		else
+		{
+			tmp[i++] = data[begin2++];
+		}
+	}
+
+	//处理较长数组的后面数据
+	while (begin1 <= end1)
+	{
+		tmp[i++] = data[begin1++];
+	}
+
+	while (begin2 <= end2)
+	{
+		tmp[i++] = data[begin2++];
+	}
+	
+	for (int j = left; j <= right;j++)
+	{
+		data[j] = tmp[j];
+	}
+}
+
+void MergeSort(int* data, int n)
+{
+	assert(data);
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	_MergeSort(data, 0, n - 1, tmp);
+	free(tmp);
+	tmp = NULL;
+
+}
+
+//非递归归并
+void MergeSortNonR(int* data, int n)
+{
+	assert(data);
+	int* tmp = (int*)malloc(sizeof(int) * n );
+	int gap = 1;
+
+	int i = 0;
+
+	while (gap < n)
+	{
+		//整组数据一趟操作
+		for (int i = 0; i < n; i += gap * 2)
+		{
+			//左区间范围 [i,i+gap-1]
+			int begin1 = i;
+			int end1 = i + gap - 1;
+			//右区间范围[i+gap,i+2*gap-1]
+			int begin2 = i + gap;
+			int end2 = i + 2 * gap - 1;
+
+			//边界控制
+			if (end1 >= n)
+			{
+				end1 = n - 1;
+
+			}
+
+			//边界控制
+			if (begin2 >= n)
+			{
+				begin2 = n ;
+				end2 = n - 1;
+			}
+
+			//边界控制
+			if (end2 >= n)
+				end2 = n - 1;
+
+			//tmp写入数据下标记录
+			int index = begin1;
+
+			//区间归并
+			while (begin1 <= end1 && begin2 <= end2)
+			{
+				if (data[begin1] < data[begin2])
+				{
+					tmp[index++] = data[begin1++];
+				}
+				else
+				{
+					tmp[index++] = data[begin2++];
+
+				}
+			}
+
+			//归并较长区间
+			while (begin1 <= end1)
+			{
+
+				tmp[index++] = data[begin1++];
+			}
+
+			while (begin2 <= end2)
+			{
+
+				tmp[index++] = data[begin2++];
+			}
+
+
+		}
+		//更新数组
+		for (int j = 0; j < n; j++)
+			data[j] = tmp[j];
+
+		gap *= 2;
+	}
+
+	free(tmp);
+	tmp = NULL;
+
 }
