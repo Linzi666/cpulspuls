@@ -65,10 +65,18 @@ void QuickSortTest()
 
 void QuickSortNonRTest()
 {
-	int arr[] = { 9,1,2,5,7,6,4,0,8 ,11,111,2,3,111,22,23,11,2,2,23,55,44,22};
+	const int N = 100;
+	int arr[100] ;
+
+
+	for (int i = 0; i < N; ++i)
+	{
+		arr[i] = rand() % 100;
+	}
+	//int arr[] = { 9,1,2,5,7,6,4,0,8 ,11,111,2,3,111,22,23,11,2,2,23,55,44,22};
 	PrintSort(arr, sizeof(arr) / sizeof(arr[0]));
 
-	QuickSortNonR(arr, 0, sizeof(arr) / sizeof(arr[0]) - 1);
+	QuickSortNonR(arr, 0, N - 1);
 
 	PrintSort(arr, sizeof(arr) / sizeof(arr[0]));
 }
@@ -95,8 +103,7 @@ void MergeSortNonRTest()
 
 void TestOP()
 {
-	srand(time(0));
-	const int N = 1000000;
+	const int N = 100;
 	int* a1 = (int*)malloc(sizeof(int) * N);
 	int* a2 = (int*)malloc(sizeof(int) * N);
 	int* a3 = (int*)malloc(sizeof(int) * N);
@@ -176,11 +183,12 @@ int main()
 	//SelectSortTest();
 	//QuickSortTest();
 	//HeapSortTest();
-	//QuickSortNonRTest();
+	QuickSortNonRTest();
 
 	//BubbleSortTest();
 	 //MergeSortNonRTest();
 
+	srand(time(0));
 
-	TestOP();
+	//TestOP();
 }

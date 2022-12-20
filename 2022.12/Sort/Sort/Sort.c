@@ -277,36 +277,65 @@ void QuickSort(int* data, int left,int right)
 }
 
 //非递归的快速排序
+//void QuickSortNonR(int* data, int left, int right)
+//{
+//	assert(data);
+//	ST st;
+//	StackInto(&st);
+//	//把左右区间入栈
+//	StackPush(&st, left);
+//	StackPush(&st, right);
+//	//栈不为空，一直执行
+//	while (!StackEmpty(&st))
+//	{
+//		int end = StackTop(&st);
+//		StackPop(&st);
+//		int begin = StackTop(&st);
+//		StackPop(&st);
+//		int keyi = Partition3(data,begin,end);
+//
+//		//右边区间入栈
+		//[left,key-1]  key [key+1,right]
+//		if (keyi < end - 1)
+//		{
+//			StackPush(&st, keyi + 1);
+//			StackPush(&st, end);
+//		}
+//		//左边区间入栈
+//		if (begin + 1 < end)
+//		{
+//			StackPush(&st, begin);
+//			StackPush(&st, keyi - 1);
+//		}
+//	}
+//}
+
 void QuickSortNonR(int* data, int left, int right)
 {
 	assert(data);
 	ST st;
 	StackInto(&st);
 	//把左右区间入栈
-	StackPush(&st, left);
+	StackPush(&st,left);
 	StackPush(&st, right);
-	//栈不为空，一直执行
+
 	while (!StackEmpty(&st))
 	{
-		int end = StackTop(&st);
+		right = StackTop(&st);
 		StackPop(&st);
-		int begin = StackTop(&st);
+		left = StackTop(&st);
 		StackPop(&st);
-		int keyi = Partition3(data,begin,end);
+		int key = Partition3(data, left, right);
+		if (left < right)
+		{
+			StackPush(&st,left);
+			StackPush(&st, key - 1);
+			StackPush(&st, key + 1);
+			StackPush(&st, right);
+		}
 
-		//右边区间入栈
-		if (keyi < end - 1)
-		{
-			StackPush(&st, keyi + 1);
-			StackPush(&st, end);
-		}
-		//左边区间入栈
-		if (begin + 1 < end)
-		{
-			StackPush(&st, begin);
-			StackPush(&st, keyi - 1);
-		}
 	}
+
 }
 
 //归并
