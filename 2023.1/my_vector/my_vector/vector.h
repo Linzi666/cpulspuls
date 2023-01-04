@@ -206,9 +206,9 @@ namespace wyl
 		}
 
 	private:
-		T* _start;
-		T* _finish;
-		T* _endofstorage;
+		iterator _start;
+		iterator _finish;
+		iterator _endofstorage;
 
 	};
 
