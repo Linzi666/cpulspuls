@@ -8,7 +8,7 @@ int main()
 	//wyl::vectortest2();
 	//wyl::vectortest3();
 	//wyl::vectortest4();
-	//wyl::vectortest5();
+	wyl::vectortest6();
 	int i = 100;
 
 	return 0;

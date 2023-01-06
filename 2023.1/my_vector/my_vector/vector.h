@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <assert.h>
+#include "ReverseIterator.h"
 using namespace std;
 namespace wyl
 {
@@ -11,7 +12,8 @@ namespace wyl
 		//迭代器
 		typedef T* iterator;
 		typedef const T* const_iterator;
-
+		typedef _reverse_iterator<iterator, T&, T*> reverse_iterator;
+		typedef _reverse_iterator<const_iterator, const T&, const T*> const_reverse_iterator;
 
 		//构造函数
 		vector()
@@ -113,6 +115,27 @@ namespace wyl
 			return _finish;
 		}
 		
+		//反向迭代器
+		reverse_iterator rbegin()
+		{
+			return reverse_iterator(_finish);
+		}
+
+		reverse_iterator rend()
+		{
+			return reverse_iterator(_start);
+		}
+
+		const_reverse_iterator rbegin()const
+		{
+			return const_reverse_iterator(_finish);
+		}
+
+		const_reverse_iterator rend()const
+		{
+			return const_reverse_iterator(_start);
+		}
+
 		//改变容量
 		void reserve(size_t t)
 		{
@@ -120,8 +143,16 @@ namespace wyl
 			{
 				//扩容
 				T* tmp = new T[t];
-				//把旧空间的拷贝到新空间
-				memcpy(tmp,_start,size()*sizeof(T));
+				//把旧空间的拷贝到新空间,浅拷贝
+				//memcpy(tmp,_start,size()*sizeof(T));
+				//深拷贝
+				if (_start)
+				{
+					for (int i = 0; i < size(); ++i)
+					{
+						tmp[i] = _start[i];
+					}
+				}
 				_finish = tmp + size();
 				delete[] _start;
 				_start = tmp;
@@ -317,26 +348,27 @@ namespace wyl
 	}
 	void vectortest5()
 	{
-		vector<int> v;
-		v.push_back(1);
-		v.push_back(2);
-		v.push_back(4);
-		v.push_back(5);
-		v.push_back(5);
+		vector<string> v;
+		v.push_back("11111111111111111");
+		v.push_back("11111111111111111");
+		v.push_back("11111111111111111");
+		v.push_back("11111111111111111");
+		v.push_back("11111111111111111");
+
 
 		//删除所有的偶数
-		vector<int>::iterator it = v.begin();
-		while (it != v.end())
-		{
-			if (*it % 2 == 0)
-			{
-				it = v.erase(it);
-			}
-			else
-			{
-				it++;
-			}
-		}
+		vector<string>::iterator it = v.begin();
+		//while (it != v.end())
+		//{
+		//	if (*it % 2 == 0)
+		//	{
+		//		it = v.erase(it);
+		//	}
+		//	else
+		//	{
+		//		it++;
+		//	}
+		//}
 		for (auto e : v)
 		{
 			cout << e << " ";
@@ -344,5 +376,28 @@ namespace wyl
 		cout << endl;
 		cout << "size:" << v.size() << endl;
 		cout << "cacpcity:" << v.cacpcity() << endl;
+	}
+
+	void B(const vector<int>& v)
+	{
+
+
+	}
+
+	void vectortest6()
+	{
+		vector<int> v;
+		v.push_back(1);
+		v.push_back(2);
+		v.push_back(3);
+		vector<int>::const_iterator it = v.begin();
+		while (it != v.end())
+		{
+			cout << *it << " ";
+			++it;
+		}
+
+		cout << endl;
+
 	}
 }
