@@ -10,5 +10,10 @@ void vectorTest()
 
 int main()
 {
-	vectorTest();
+	//vectorTest();
+
+	if (-1 == 0xfff666)
+	{
+		cout << "a";
+	}
 }
