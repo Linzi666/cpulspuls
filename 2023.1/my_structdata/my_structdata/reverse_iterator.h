@@ -44,8 +44,7 @@ public:
 
 	Ptr operator->()
 	{
-		Ptr tmp = (*this)._it;
-		return --tmp;
+		return &operator*();
 	}
 
 	bool operator!=(const self& it)

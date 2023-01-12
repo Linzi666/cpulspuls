@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"vector.h"
+#include"list.h"
 
 void vectorTest()
 {
@@ -8,12 +9,19 @@ void vectorTest()
 
 }
 
+void listTest()
+{
+	//wyl::listTest2();
+	//wyl::listTest3();
+	//wyl::listTest4();
+	//wyl::listTest5();
+	wyl::listTest6();
+
+}
+
 int main()
 {
 	//vectorTest();
+	listTest();
 
-	if (-1 == 0xfff666)
-	{
-		cout << "a";
-	}
 }
