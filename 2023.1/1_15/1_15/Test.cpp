@@ -164,13 +164,27 @@ void PrintVTable(VFPTR vTable[])
 	}
 	cout << endl << endl;
 }
+//int main()
+//{
+//	me m;
+//
+//	VFPTR * vTableb = (VFPTR*)(*(void**)&m);
+//	PrintVTable(vTableb);
+//	VFPTR* vTabled = (VFPTR*)(*(void**)((char*)&m+sizeof(Base1)));
+//	PrintVTable(vTabled);
+//	return 0;
+//}
+
+#include<stdio.h>
 int main()
 {
-	me m;
-
-	VFPTR * vTableb = (VFPTR*)(*(void**)&m);
-	PrintVTable(vTableb);
-	VFPTR* vTabled = (VFPTR*)(*(void**)((char*)&m+sizeof(Base1)));
-	PrintVTable(vTabled);
+	int i  = 0;
+	for (i = 1; i <= 5; i++)
+		switch (i%5) {
+		case 0:printf("*"); break;
+		case 1:printf("#"); break; 
+		default:printf("\n"); 
+		case 2:printf("&");
+		}
 	return 0;
 }
