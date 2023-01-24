@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"vector.h"
 #include"list.h"
+#include "AVLTree.h"
 
 void vectorTest()
 {
@@ -19,9 +20,15 @@ void listTest()
 
 }
 
+void AVLTest()
+{
+	wyl::AVLTest1();
+}
+
 int main()
 {
 	//vectorTest();
-	listTest();
+	//listTest();
+	AVLTest();
 
 }
