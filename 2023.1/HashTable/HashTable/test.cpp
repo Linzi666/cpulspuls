@@ -6,6 +6,6 @@ using namespace std;
 
 int main()
 {
-	wyl::TestHashTable();
+	wyl::TestHashTable2();
 	return 0;
 }

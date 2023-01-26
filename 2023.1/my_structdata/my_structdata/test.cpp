@@ -2,6 +2,7 @@
 #include"vector.h"
 #include"list.h"
 #include "AVLTree.h"
+#include  "RBTree.h"
 
 void vectorTest()
 {
@@ -25,10 +26,14 @@ void AVLTest()
 	wyl::AVLTest1();
 }
 
+void RBTTest()
+{
+	wyl::RBTTest1();
+}
 int main()
 {
 	//vectorTest();
 	//listTest();
-	AVLTest();
-
+	//AVLTest();
+	RBTTest();
 }
