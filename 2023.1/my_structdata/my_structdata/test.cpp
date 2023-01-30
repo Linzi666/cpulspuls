@@ -3,6 +3,8 @@
 #include"list.h"
 #include "AVLTree.h"
 #include  "RBTree.h"
+#include"CloseHash.h"
+#include"Link_Hash.h"
 
 void vectorTest()
 {
@@ -30,10 +32,18 @@ void RBTTest()
 {
 	wyl::RBTTest1();
 }
+
+void HashTest()
+{
+	//wyl::HashTest1();
+	wyl::HashTest3();
+
+}
 int main()
 {
 	//vectorTest();
 	//listTest();
 	//AVLTest();
-	RBTTest();
+	//RBTTest();
+	HashTest();
 }
