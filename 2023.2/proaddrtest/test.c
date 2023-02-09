@@ -41,5 +41,5 @@ int main()
     //erro
     perror("fork:");
   }
-
+  return 0;
 }
