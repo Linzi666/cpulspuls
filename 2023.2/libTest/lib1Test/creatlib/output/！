@@ -1,0 +1,6 @@
+test:test.c
+	gcc -L. -l mymath
+
+.PHONY:clean
+clean:
+	rm -f test
