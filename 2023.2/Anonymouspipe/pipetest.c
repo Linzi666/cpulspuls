@@ -30,7 +30,7 @@ int main()
     }
   }
   //parent read
-  close(pp[1]); //关闭读
+  close(pp[1]); //关闭写
   while(1)
   {
      sleep(10);
